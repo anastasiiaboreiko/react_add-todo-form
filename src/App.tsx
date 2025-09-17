@@ -37,10 +37,12 @@ export const App = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    setHasTitleError(!title);
+    const trimmed = title.trim();
+
+    setHasTitleError(!trimmed);
     setHasUserIdError(!userId);
 
-    if (!title || !userId) {
+    if (!trimmed || !userId) {
       return;
     }
 
@@ -121,7 +123,7 @@ export const App = () => {
         </button>
       </form>
 
-      <TodoList todos={todos} />
+      <TodoList todos={todos.filter(todo => todo.user)} />
     </div>
   );
 };
